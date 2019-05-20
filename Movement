@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Jonathan Dion
+/// Manage a movement for a Pacman
+/// 2019-05-20 16:11
+/// ---Journal--
+/// Create a m_speed, m_spriteRenderer, m_direction and m_rotation variable
+/// Assign a rotation according to a direction into a Update
+/// Create Move function
+/// </summary>
+
+public class PlayerController : MonoBehaviour {
+    //Speed of a player
+    [SerializeField]
+    float m_speed;
+    //SpriteRenderer of the player
+    [SerializeField]
+    SpriteRenderer m_spriteRenderer;
+
+    bool m_isMove;
+    Quaternion m_rotation;
+    Vector2 m_direction;
+
+	// Use this for initialization
+	void Start () {
+        //Set a SpriteRender to the component of a player
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_rotation = Quaternion.Euler(0, 0, 0);
+        m_direction = new Vector2(0, 0);
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        //Up
+        if (Input.GetKeyDown(KeyCode.W)) {
+            m_spriteRenderer.flipX = false;
+            m_rotation = Quaternion.Euler(0, 0, 90);
+            m_direction = new Vector2(0,1);
+        }
+        //Left
+        if (Input.GetKeyDown(KeyCode.A)) {
+            m_spriteRenderer.flipX = true;
+            m_rotation = Quaternion.Euler(0, 0, 0);
+            m_direction = Vector2.left;
+        }
+        //Down
+        if (Input.GetKeyDown(KeyCode.S)) {
+            m_spriteRenderer.flipX = false;
+            m_rotation = Quaternion.Euler(0, 0, -90);
+            m_direction = new Vector2(0,-1);
+        }
+        //Right
+        if (Input.GetKeyDown(KeyCode.D)) {
+            m_spriteRenderer.flipX = false;
+            m_rotation = Quaternion.Euler(0, 0, 0);
+            m_direction = Vector2.right;
+        }
+
+        Move(m_direction, m_rotation);
+    }
+
+    //Move a Player
+    void Move(Vector2 p_direction, Quaternion p_rotation) {
+        //Move a player with a speed
+        transform.localRotation = p_rotation;
+        transform.localPosition += (Vector3)(m_direction * m_speed) * Time.deltaTime;
+    }
+}

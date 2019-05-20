@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Jonathan Dion
+/// Specification for each cell of a grid
+/// 2019-05-20 18:05
+/// --Journal--
+/// 
+/// </summary>
+
+public class Node : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
